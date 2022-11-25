@@ -1,0 +1,32 @@
+@use '../../sass/variables' as *
+
+.button
+    background: $green-500
+    font-family: 'Quicksand', sans-serif
+    font-size: 1.2rem
+    color: white
+    cursor: pointer
+    border-radius: 10px
+    border: 0
+    padding: 15px 25px
+    transition: background 0.15s ease
+
+    &:hover
+        background: darken($green-500, 10%)
+        color: white
+
+.button--secondary
+    background: $blue-500
+
+    &:hover
+        background: darken($blue-500, 10%)
+
+.button--danger
+    background: $red-500
+
+    &:hover
+        background: darken($red-500, 10%)
+
+.button--fluid
+    width: 100%
+    box-sizing: border-box

@@ -1,0 +1,42 @@
+@use '../../sass/variables' as *
+
+.page
+    background: $yellow-300
+
+.page__container
+    display: flex
+    width: 90%
+    min-height: 100vh
+    max-width: 1024px
+    flex-direction: column
+    margin: 0 auto
+
+.page__content
+    display: grid
+    row-gap: 30px
+
+.page--onca
+    background: $black url('../../images/bg.svg')
+    background-size: 50%
+
+    .title
+        color: $yellow-500
+
+        .title__desc
+            color: $yellow-300
+
+    .input__label
+        color: grey
+
+    .input__field
+        background: $dark-grey
+        color: white
+
+    .input__field:focus-visible
+        outline: 2px solid $yellow-500
+
+    .button--primary
+        background: $yellow-500
+
+        &:hover
+            background: darken($yellow-500, 10%)
