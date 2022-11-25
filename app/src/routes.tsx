@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Home, ListaPresentes, Onca, Sorteio, SorteioNovo } from "./pages";
+import { Home, ListaPresentes, Resultado, Sorteio } from "./pages";
 
 export const routes = createBrowserRouter([
     {
@@ -8,7 +8,7 @@ export const routes = createBrowserRouter([
     },
     {
         path: "/secreto/novo",
-        element: <SorteioNovo />,
+        element: <Sorteio />,
         loader: () => ({
             title: 'Secreto',
             name: 'secreto'
@@ -16,7 +16,7 @@ export const routes = createBrowserRouter([
     },
     {
         path: "/onca/novo",
-        element: <SorteioNovo />,
+        element: <Sorteio />,
         loader: () => ({
             title: 'da Onça',
             name: 'onca'
@@ -24,11 +24,19 @@ export const routes = createBrowserRouter([
     },
     {
         path: "/secreto/:id/:title",
-        element: <Sorteio />,
+        element: <Resultado />,
+        loader: () => ({
+            title: 'Secreto',
+            name: 'secreto'
+        })
     },
     {
         path: "/onca/:id/:title",
-        element: <Onca />,
+        element: <Resultado />,
+        loader: () => ({
+            title: 'da Onça',
+            name: 'onca'
+        })
     },
     {
         path: "/lista-de-presentes/:id/:title",

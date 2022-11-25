@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Info } from "../Info/Info";
 import { Title } from "../Title/Title";
 import "./Page.sass";
 
@@ -13,10 +14,11 @@ export const Page = ({ name, desc, children }: PageProps) => {
         <main className={`page page--${name}`}>
             <div className="page__container">
                 <div className="page__content">
-                    <Title desc={desc}>Amiguxos</Title>
+                    <Title desc={desc}>Amiguxos ✨</Title>
                     {children}
                 </div>
             </div>
+            <Info />
         </main>
     );
 };

@@ -2,28 +2,34 @@
 
 .page
     background: $yellow-300
+    overflow: auto
+    padding-bottom: 50px
 
 .page__container
     display: flex
     width: 90%
     min-height: 100vh
-    max-width: 1024px
+    max-width: 600px
     flex-direction: column
     margin: 0 auto
 
 .page__content
     display: grid
-    row-gap: 30px
+    row-gap: 20px
 
 .page--onca
     background: $black url('../../images/bg.svg')
-    background-size: 50%
+    background-size: 300px
+    color: lightgrey
 
     .title
         color: $yellow-500
 
         .title__desc
             color: $yellow-300
+
+    .subtitle
+        color: $yellow-300
 
     .input__label
         color: grey
@@ -40,3 +46,22 @@
 
         &:hover
             background: darken($yellow-500, 10%)
+
+    .button--third
+        background: rgba(255, 255, 255, 0.25)
+        backdrop-filter: blur(5px)
+
+    .resultado__copy
+        background: $green-500
+
+    .resultado__info
+        border-color: $yellow-500
+
+    .info
+        background: rgba(255, 255, 255, 0.25)
+
+    a
+        color: $yellow-500
+
+        &:hover
+            color: darken($yellow-500, 10%)
