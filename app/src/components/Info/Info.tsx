@@ -4,7 +4,12 @@ import { ReactComponent as Github } from "../../images/github.svg";
 export const Info = () => {
     return (
         <div className="info">
-            <a href="https://github.com/eduardotorresdev/amiguxos" className="info__github">
+            <a
+                target="_blank"
+                rel="noreferrer"
+                href="https://github.com/eduardotorresdev/amiguxos"
+                className="info__github"
+            >
                 <Github />
             </a>
             <div className="info__text">

@@ -1,11 +1,13 @@
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { Loader } from "../Loader/Loader";
 import "./Button.sass";
 
 type ButtonProps = {
     type?: "button" | "submit";
     className?: string;
     tabIndex?: number;
+    loading?: boolean;
     to?: string;
     fluid?: boolean;
     state?: "primary" | "secondary" | "danger" | "third";
@@ -22,6 +24,7 @@ export const Button = ({
     state = "primary",
     onClick,
     children,
+    loading,
 }: ButtonProps) =>
     to ? (
         <Link
@@ -40,8 +43,11 @@ export const Button = ({
             onClick={onClick}
             className={`button button--${state} ${className} ${
                 fluid && "button--fluid"
-            }`}
+            } ${loading && "button--loading"}`}
         >
             {children}
+            <div className="button__loader">
+                <Loader />
+            </div>
         </button>
     );

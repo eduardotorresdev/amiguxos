@@ -1,11 +1,17 @@
 @use '../../sass/variables' as *
 
-.resultado__subtitle code
-    background: $blue-500
-    color: white
-    border-radius: 10px
-    padding: 0 10px
-    margin-left: 15px
+.resultado__subtitle.subtitle
+    display: inline-flex
+    justify-content: center
+    align-items: center
+
+    code
+        background: $light-blue-500
+        color: white
+        font-size: 2rem
+        border-radius: 10px
+        padding: 0 10px
+        margin-left: 15px
 
 .resultado__compartilhe
     display: grid
@@ -32,3 +38,21 @@ h4.resultado__title
     background: $blue-500
     font-size: 1rem
     padding: 10px
+
+.resultado__modal
+    display: grid
+    justify-items: center
+    font-size: 1.25rem
+    color: white
+    line-height: 1.5
+
+    h2
+        font-size: 2.5rem
+
+.resultado__destaque
+    background: $yellow-300
+    font-size: 3rem
+    color: $green-500
+    border-radius: 20px
+    padding: 10px 20px
+    margin-bottom: 30px

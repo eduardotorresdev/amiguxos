@@ -1,0 +1,46 @@
+.modal
+    display: flex
+    justify-content: center
+    align-items: flex-start
+    position: fixed
+    top: 0
+    left: 0
+    width: 100vw
+    height: 100vh
+    background: rgba(0,0,0,0.8)
+    backdrop-filter: blur(20px)
+    padding-top: 10vh
+    opacity: 0
+    pointer-events: none
+    transition: opacity 300ms ease
+
+.modal--show
+    opacity: 1
+    pointer-events: all
+
+    .modal__dialog
+        transform: scale(1)
+
+.modal__dialog
+    display: grid
+    row-gap: 20px
+    width: 90%
+    max-width: 400px
+    margin: 0 auto
+    transform: scale(0.9)
+    transition: transform 300ms ease
+
+.modal
+    .input__label
+        color: white
+
+.modal .title, .modal .title__desc, .modal .title__link
+    color: white
+    pointer-events: none
+
+    &:hover
+        color: white
+
+.modal__actions
+    display: flex
+    justify-content: space-between

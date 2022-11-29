@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import { Link } from "react-router-dom";
 import "./Title.sass";
 
 type TitleProps = {
@@ -9,8 +10,10 @@ type TitleProps = {
 export const Title = ({ desc, children }: TitleProps) => {
     return (
         <h1 className="title">
-            {children}
-            {desc && <span className="title__desc">{desc}</span>}
+            <Link to="/" className="title__link">
+                {children}
+                {desc && <span className="title__desc">{desc}</span>}
+            </Link>
         </h1>
     );
 };
