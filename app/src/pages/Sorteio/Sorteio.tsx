@@ -1,9 +1,11 @@
 import { Button, Form, Input } from "../../components";
 import { useForm, useFieldArray } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
 import "./Sorteio.sass";
 import { Page } from "../../components";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useSorteio } from "../../hooks";
+import * as yup from "yup";
 
 interface SorteioForm {
     title: string;
@@ -13,6 +15,16 @@ interface SorteioForm {
     }[];
 }
 
+const schema = yup.object({
+    title: yup.string().required("Campo obrigatório"),
+    date: yup.string().required("Campo obrigatório"),
+    participants: yup.array().of(
+        yup.object({
+            name: yup.string().required("Campo obrigatório"),
+        })
+    ),
+});
+
 export const Sorteio = () => {
     const { create, loading } = useSorteio();
     const navigate = useNavigate();
@@ -21,7 +33,13 @@ export const Sorteio = () => {
         name: string;
     };
 
-    const { handleSubmit, control, register } = useForm({
+    const {
+        handleSubmit,
+        control,
+        register,
+        formState: { errors },
+    } = useForm({
+        resolver: yupResolver(schema),
         defaultValues: {
             title: "",
             date: "",
@@ -36,52 +54,68 @@ export const Sorteio = () => {
     const onSubmit = async (data: SorteioForm) => {
         const sorteio = await create({
             ...data,
+            type: name,
             participants: data.participants.map(
                 (participant) => participant.name
             ),
         });
 
-        console.log(sorteio);
+        navigate(`/${name}/${sorteio.id}/${sorteio.slug}`, {
+            state: sorteio
+        });
     };
-
+    
     return (
         <Page name={name} desc={title}>
             <Form onSubmit={handleSubmit(onSubmit)}>
-                <Input name="title" label={`Título da brincadeira`} />
-                <Input type="date" name="date" label={`Data dos presentes`} />
+                <Input
+                    register={register}
+                    name="title"
+                    error={errors.title?.message}
+                    label={`Título da brincadeira`}
+                />
+                <Input
+                    register={register}
+                    type="date"
+                    error={errors.date?.message}
+                    name="date"
+                    label={`Data dos presentes`}
+                />
                 <ul className="sorteio__list">
                     {fields.map((field, index) => (
                         <li key={field.id} className="sorteio__item">
                             <Input
                                 register={register}
+                                error={
+                                    errors.participants &&
+                                    errors.participants[index]?.name?.message
+                                }
                                 name={`participants[${index}].name`}
                                 label={`Jogador ${index + 1}`}
                             />
-                            {index === 0 ? (
-                                <Button
-                                    tabIndex={-1}
-                                    className="sorteio__add"
-                                    onClick={() =>
-                                        append({
-                                            name: "",
-                                        })
-                                    }
-                                >
-                                    +
-                                </Button>
-                            ) : (
-                                <Button
-                                    tabIndex={-1}
-                                    state="danger"
-                                    className="sorteio__add"
-                                    onClick={() => remove(index)}
-                                >
-                                    -
-                                </Button>
-                            )}
+                            <Button
+                                tabIndex={-1}
+                                state="danger"
+                                className="sorteio__remove"
+                                onClick={() => remove(index)}
+                            >
+                                -
+                            </Button>
                         </li>
                     ))}
                 </ul>
+                <Button
+                    tabIndex={-1}
+                    state="secondary"
+                    className="sorteio__add"
+                    onClick={() =>
+                        append({
+                            name: "",
+                        })
+                    }
+                >
+                    Adicionar jogador +
+                </Button>
                 <div className="sorteio__actions">
                     <Button onClick={() => navigate(-1)} state="third">
                         Voltar

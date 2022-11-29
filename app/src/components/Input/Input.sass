@@ -1,6 +1,7 @@
 @use '../../sass/variables' as *
 
 .input
+    position: relative
     display: grid
     row-gap: 6px
 
@@ -18,3 +19,19 @@
 
 .input__field--uppercase
     text-transform: uppercase
+
+.input__error,
+.input__helper
+    font-size: 0.875rem
+
+.input__error
+    position: absolute
+    right: 0
+    bottom: 0
+    color: $red-500
+    transform: translateY(20px)
+
+.input__helper
+    font-style: italic
+    text-align: right
+    opacity: 0.7

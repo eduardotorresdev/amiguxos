@@ -3,6 +3,7 @@ import { Model } from 'mongoose';
 import { CreateSorteioDto } from './dto/create-sorteio.dto';
 import { Sorteio } from './entities/sorteio.entity';
 import { v4 as uuidv4 } from 'uuid';
+import slugify from 'slugify';
 
 type Participant = {
   from: string;
@@ -35,6 +36,7 @@ export class SorteioService {
     const createdSorteio = new this.sorteioModel({
       ...createSorteioDto,
       _id: uuidv4(),
+      slug: slugify(createSorteioDto.title).toLowerCase(),
       participants: sorteio,
     });
 
