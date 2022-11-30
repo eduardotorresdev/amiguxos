@@ -2,6 +2,8 @@
     "routes": [
         "/",
         "/onca/novo",
-        "/secreto/novo"
+        "/secreto/novo",
+        "/onca/id/title",
+        "/secreto/id/title"
     ]
 }

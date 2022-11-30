@@ -42,7 +42,7 @@ export const Resultado = () => {
     const [sorteio, setSorteio] = useState<Sorteio | null>(null);
     const [skeleton, setSkeleton] = useState(true);
     const { state } = useLocation();
-    const { id, title: slug } = useParams();
+    const { id, title: slug = '' } = useParams();
     const {
         handleSubmit,
         register,
@@ -55,6 +55,9 @@ export const Resultado = () => {
     });
 
     useEffect(() => {
+        if(id === 'id')
+            return;
+
         if (state) {
             setSorteio(state);
             setSkeleton(false);
