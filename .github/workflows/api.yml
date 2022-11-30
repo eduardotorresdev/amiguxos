@@ -1,6 +1,11 @@
 name: Api
 
-on: [workflow_dispatch]
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - api/**
 jobs:
   build:
     runs-on: ubuntu-latest
