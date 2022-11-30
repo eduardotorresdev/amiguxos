@@ -11,8 +11,6 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: '18'
-        cache: 'yarn'
-        cache-dependency-path: app/yarn.lock
     - name: Install node dependencies
       run: yarn install --prefer-offline
     - name: Env configuration
