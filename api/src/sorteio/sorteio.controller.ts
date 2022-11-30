@@ -1,4 +1,11 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  NotFoundException,
+} from '@nestjs/common';
 import { SorteioService } from './sorteio.service';
 import { CreateSorteioDto } from './dto/create-sorteio.dto';
 
@@ -11,9 +18,12 @@ export class SorteioController {
     return this.sorteioService.create(createSorteioDto);
   }
 
-  @Get(':id')
-  async findOne(@Param('id') id: string) {
-    const sorteio = await this.sorteioService.findById(id);
+  @Get(':type/:id')
+  async findOne(@Param('type') type: string, @Param('id') id: string) {
+    const sorteio = await this.sorteioService.findById(type, id);
+
+    if (!sorteio)
+      throw new NotFoundException('O sorteio consultado não encontrado');
 
     return sorteio;
   }
@@ -23,6 +33,13 @@ export class SorteioController {
     @Param('id') id: string,
     @Param('participant') participant: string,
   ) {
-    return this.sorteioService.findFromTo(id, participant);
+    const fromTo = this.sorteioService.findFromTo(id, participant);
+
+    if (!fromTo)
+      throw new NotFoundException(
+        'Verifique se o nome/email que você inseriu está correto',
+      );
+
+    return fromTo;
   }
 }

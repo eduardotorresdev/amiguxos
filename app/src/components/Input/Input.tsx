@@ -36,6 +36,7 @@ export const Input = ({
             maxLength={maxLength}
             name={name}
             className={`input__field ${uppercase && "input__field--uppercase"}`}
+            autoComplete="off"
         />
         {helper && <span className="input__helper">{helper}</span>}
         {error && <span className="input__error">{error}</span>}

@@ -59,7 +59,7 @@ export const Resultado = () => {
         async function find() {
             if (!id) return;
 
-            const sorteio = await findById(id);
+            const sorteio = await findById(name, id);
             if (sorteio) setSorteio(sorteio);
         }
         find();

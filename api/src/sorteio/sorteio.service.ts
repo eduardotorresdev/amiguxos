@@ -43,9 +43,9 @@ export class SorteioService {
     return createdSorteio.save();
   }
 
-  async findById(_id: string): Promise<Sorteio> {
+  async findById(type: string, _id: string): Promise<Sorteio> {
     return this.sorteioModel
-      .findOne({ _id: { $regex: `${_id}$`, $options: 'i' } })
+      .findOne({ _id: { $regex: `${_id}$`, $options: 'i' }, type })
       .exec();
   }
 
