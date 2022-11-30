@@ -22,11 +22,6 @@ jobs:
         cache-dependency-path: api/yarn.lock
     - name: Install node dependencies
       run: yarn install --prefer-offline
-    - name: Env configuration
-      run: |
-        mv .env.prod .env
-        rm .env.example
-        echo -e '\nDB_PASS="${{ secrets.DB_PASS }}"' >> .env
     - name: Compile assets
       run: yarn build
     - name: Deploy api
