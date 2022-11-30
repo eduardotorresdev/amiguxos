@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./app
+        working-directory: ./api
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v2
@@ -18,14 +18,15 @@ jobs:
       run: |
         mv .env.prod .env
         rm .env.example
+        echo -e '\nDB_PASS="${{ secrets.DB_PASS }}"' >> .env
     - name: Compile assets
       run: yarn build
     - name: Deploy
       uses: burnett01/rsync-deployments@5.1
       with:
         switches: -avzr
-        path: app/build/
-        remote_path: ${{ secrets.DEPLOY_APP_PATH }}
+        path: api/dist/
+        remote_path: ${{ secrets.DEPLOY_API_PATH }}
         remote_host: ${{ secrets.DEPLOY_HOST }}
         remote_port: ${{ secrets.DEPLOY_PORT }}
         remote_user: ${{ secrets.DEPLOY_USER }}
