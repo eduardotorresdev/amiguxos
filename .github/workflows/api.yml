@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Api
 
 on: [workflow_dispatch]
 jobs:
@@ -21,11 +21,21 @@ jobs:
         echo -e '\nDB_PASS="${{ secrets.DB_PASS }}"' >> .env
     - name: Compile assets
       run: yarn build
-    - name: Deploy
+    - name: Deploy api
       uses: burnett01/rsync-deployments@5.1
       with:
         switches: -avzr
         path: api/dist/
+        remote_path: ${{ secrets.DEPLOY_API_PATH }}
+        remote_host: ${{ secrets.DEPLOY_HOST }}
+        remote_port: ${{ secrets.DEPLOY_PORT }}
+        remote_user: ${{ secrets.DEPLOY_USER }}
+        remote_key: ${{ secrets.DEPLOY_KEY }}
+    - name: Deploy node_modules
+      uses: burnett01/rsync-deployments@5.1
+      with:
+        switches: -avzr
+        path: api/node_modules
         remote_path: ${{ secrets.DEPLOY_API_PATH }}
         remote_host: ${{ secrets.DEPLOY_HOST }}
         remote_port: ${{ secrets.DEPLOY_PORT }}
