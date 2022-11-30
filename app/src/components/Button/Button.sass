@@ -74,3 +74,21 @@
     &::before,
     .button__loader
         opacity: 1
+
+.button--skeleton
+    display: inline-block
+    pointer-events: none
+
+    &::after
+        content: ''
+        display: block
+        position: absolute
+        top: 0
+        left: 0
+        @include skeleton($green-500)
+        width: 100%
+        height: 100%
+        border-radius: 5px
+
+    &.button--secondary:after
+        @include skeleton($blue-500)

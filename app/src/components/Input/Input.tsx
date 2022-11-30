@@ -11,6 +11,7 @@ type InputProps = {
     register?: UseFormRegister<any>;
     error?: string;
     helper?: string;
+    skeleton?: boolean;
 };
 
 export const Input = ({
@@ -22,9 +23,10 @@ export const Input = ({
     maxLength,
     label,
     error,
+    skeleton,
     helper,
 }: InputProps) => (
-    <div className="input">
+    <div className={`input ${skeleton && 'input--skeleton'}`}>
         <label htmlFor={name} className="input__label">
             {label}
         </label>

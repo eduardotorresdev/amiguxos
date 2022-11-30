@@ -8,9 +8,11 @@ import {
 import {
     Button,
     Form,
+    Hash,
     Input,
     Modal,
     Page,
+    Panel,
     Subtitle,
     useModal,
 } from "../../components";
@@ -37,6 +39,7 @@ export const Resultado = () => {
     };
     const { findById } = useSorteio();
     const [sorteio, setSorteio] = useState<Sorteio | null>(null);
+    const [skeleton, setSkeleton] = useState(true);
     const { state } = useLocation();
     const { id, title: slug } = useParams();
     const {
@@ -53,14 +56,15 @@ export const Resultado = () => {
     useEffect(() => {
         if (state) {
             setSorteio(state);
+            setSkeleton(false);
             return;
         }
 
         async function find() {
             if (!id) return;
-
             const sorteio = await findById(name, id);
             if (sorteio) setSorteio(sorteio);
+            setSkeleton(false);
         }
         find();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -71,10 +75,10 @@ export const Resultado = () => {
 
         if (sorteio.type !== name) {
             navigate(`/${sorteio.type}/${id}/${slug}`, {
-                state: sorteio
+                state: sorteio,
             });
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [sorteio]);
 
     const copiarTexto = () => {
@@ -95,7 +99,7 @@ export const Resultado = () => {
     const onSubmit = async (data: { name: string }) => {
         if (!id) return;
 
-        const sorteio = await findFromTo(id, data.name);
+        const sorteio = await findFromTo(name, id, data.name);
 
         setSorteado(sorteio.to);
         toggle();
@@ -103,34 +107,38 @@ export const Resultado = () => {
 
     return (
         <Page name={name} desc={title}>
-            <Subtitle className="resultado__subtitle">
+            <Subtitle className="resultado__subtitle" skeleton={skeleton}>
                 {sorteio?.title}
             </Subtitle>
             <span className="reusltado__codigo">
                 Código do sorteio:{" "}
-                <code className="resultado__hash">
-                    #{sorteio?.id.toUpperCase()}
-                </code>
+                <Hash skeleton={skeleton}>{sorteio?.id.toUpperCase()}</Hash>
             </span>
             <Form onSubmit={handleSubmit(onSubmit)}>
                 <Input
                     register={register}
                     label="Digite o seu nome/e-mail"
                     name="name"
+                    skeleton={skeleton}
                     error={errors.name?.message}
                 />
-                <Button type="submit" loading={loadingSorteado}>
+                <Button type="submit" skeleton={skeleton} loading={loadingSorteado}>
                     Veja quem você tirou
                 </Button>
             </Form>
             <div className="resultado__compartilhe">
                 <h3 className="resultado__title">
                     Compartilhe:{" "}
-                    <Button className="resultado__copy" onClick={copiarTexto}>
+                    <Button
+                        className="resultado__copy"
+                        state="secondary"
+                        skeleton={skeleton}
+                        onClick={copiarTexto}
+                    >
                         Copiar texto
                     </Button>
                 </h3>
-                <div className="resultado__info" ref={infoRef}>
+                <Panel skeleton={skeleton} ref={infoRef}>
                     Oiii, tudo bom?
                     <br />
                     Veja agora mesmo quem você tirou no nosso amigo{" "}
@@ -151,7 +159,7 @@ export const Resultado = () => {
                             </li>
                         ))}
                     </ul>
-                </div>
+                </Panel>
                 <div className="resultado__qrcode"></div>
             </div>
             <Modal show={show}>

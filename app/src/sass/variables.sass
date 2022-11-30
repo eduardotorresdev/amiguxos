@@ -4,5 +4,18 @@ $red-500: #f40058
 $yellow-500: #efa500
 $yellow-300: #ffe2a3
 $green-500: #41b853
+$grey: #e1e1e1
 $dark-grey: #404040
 $black: #171717
+
+@keyframes shine-lines
+    0%
+        background-position: 50%
+
+    40%, 100%
+        background-position: -200%
+
+@mixin skeleton($color, $duration: 1.5s)
+    background-image: linear-gradient(90deg, $color 0%, lighten($color, 10%) 10%, $color 20%)
+    background-size: 150%
+    animation: shine-lines $duration infinite linear

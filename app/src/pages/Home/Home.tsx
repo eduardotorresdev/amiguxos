@@ -43,10 +43,10 @@ export const Home = () => {
                         +
                     </Button>
                 </li>
-                <li className="home__item">
+                {/* <li className="home__item">
                     <Button fluid>Lista de presentes 🎁</Button>
                     <Button state="secondary">+</Button>
-                </li>
+                </li> */}
             </ul>
             <Busca show={show} toggle={toggle} data={data} />
         </Page>

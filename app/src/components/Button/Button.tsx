@@ -10,6 +10,7 @@ type ButtonProps = {
     loading?: boolean;
     to?: string;
     fluid?: boolean;
+    skeleton?: boolean;
     state?: "primary" | "secondary" | "danger" | "third";
     onClick?: () => void;
     children: ReactNode;
@@ -24,6 +25,7 @@ export const Button = ({
     state = "primary",
     onClick,
     children,
+    skeleton,
     loading,
 }: ButtonProps) =>
     to ? (
@@ -31,7 +33,7 @@ export const Button = ({
             to={to}
             className={`button button--${state} ${className} ${
                 fluid && "button--fluid"
-            }`}
+            } ${skeleton && 'button--skeleton'}`}
             tabIndex={tabIndex}
         >
             {children}
@@ -43,7 +45,8 @@ export const Button = ({
             onClick={onClick}
             className={`button button--${state} ${className} ${
                 fluid && "button--fluid"
-            } ${loading && "button--loading"}`}
+            } ${loading && "button--loading"}
+            ${skeleton && 'button--skeleton'}`}
         >
             {children}
             <div className="button__loader">

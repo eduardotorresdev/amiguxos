@@ -49,10 +49,10 @@ export const useSorteio = () => {
         }
     }
 
-    const findFromTo = async (id: string, name: string) => {
+    const findFromTo = async (type:string, id: string, name: string) => {
         try {
             setLoading(true);
-            const response = await api.get(`sorteios/${id}/${name}`);
+            const response = await api.get(`sorteios/${type}/${id}/${name}`);
 
             return response.data;
         } catch (e) {

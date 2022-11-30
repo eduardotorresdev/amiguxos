@@ -28,7 +28,7 @@ export class SorteioController {
     return sorteio;
   }
 
-  @Get(':id/:participant')
+  @Get(':type/:id/:participant')
   findFromTo(
     @Param('id') id: string,
     @Param('participant') participant: string,
