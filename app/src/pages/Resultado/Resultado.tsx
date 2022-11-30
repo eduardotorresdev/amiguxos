@@ -22,6 +22,7 @@ import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { Helmet } from "react-helmet";
 
 const schema = yup.object({
     name: yup.string().required("Campo obrigatório"),
@@ -107,6 +108,13 @@ export const Resultado = () => {
 
     return (
         <Page name={name} desc={title}>
+            <Helmet>
+                <meta property="og:title" content="Quem você tirou?" />
+                <meta
+                    property="og:description"
+                    content={`Veja agora quem você tirou no nosso amigo ${name}`}
+                />
+            </Helmet>
             <Subtitle className="resultado__subtitle" skeleton={skeleton}>
                 {sorteio?.title}
             </Subtitle>
@@ -122,7 +130,11 @@ export const Resultado = () => {
                     skeleton={skeleton}
                     error={errors.name?.message}
                 />
-                <Button type="submit" skeleton={skeleton} loading={loadingSorteado}>
+                <Button
+                    type="submit"
+                    skeleton={skeleton}
+                    loading={loadingSorteado}
+                >
                     Veja quem você tirou
                 </Button>
             </Form>
