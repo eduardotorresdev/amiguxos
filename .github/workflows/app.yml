@@ -1,10 +1,6 @@
 name: Build and Deploy
-on:
-  workflow_dispatch:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+
+on: [workflow_dispatch]
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -19,15 +15,14 @@ jobs:
     - name: Install node dependencies
       run: yarn install --prefer-offline
     - name: Env configuration
-      run: |
-        mv .env.prod .env
+      run: mv .env.prod .env
     - name: Compile assets
       run: yarn build
     - name: Deploy
       uses: burnett01/rsync-deployments@5.1
       with:
         switches: -avzr
-        path: app/build/
+        path: app/
         remote_path: ${{ secrets.DEPLOY_PATH }}
         remote_host: ${{ secrets.DEPLOY_HOST }}
         remote_port: ${{ secrets.DEPLOY_PORT }}
