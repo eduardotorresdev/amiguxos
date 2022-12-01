@@ -13,6 +13,7 @@ export const App = () => {
             hitType: "pageview",
             page: window.location.pathname + window.location.search,
         });
+        document.documentElement.setAttribute('style', 'opacity: 1');
     }, []);
 
     return (
