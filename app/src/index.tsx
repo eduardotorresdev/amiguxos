@@ -4,6 +4,10 @@ import { App } from "./components";
 import reportWebVitals from "./reportWebVitals";
 import "./sass/index.sass";
 
+document.onload = () => {
+    document.body.classList.remove('preload');
+}
+
 const rootElement = document.getElementById("root") as HTMLElement;
 if (rootElement.hasChildNodes()) {
     ReactDOM.hydrate(
