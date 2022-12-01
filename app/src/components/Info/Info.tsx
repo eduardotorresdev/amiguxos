@@ -14,9 +14,14 @@ export const Info = () => {
             </a>
             <div className="info__text">
                 Você gostou de utilizar o aplicativo livre e gratuito? Mande um
-                cafézinho para o{" "}
-                <a href="https://github.com/eduardotorresdev">desenvolvedor</a>,
-                Mande um pix
+                cafézinho para o desenvolvedor,{" "}
+                <a
+                    target="blank"
+                    rel="noreferrer"
+                    href="https://nubank.com.br/pagar/123enm/FnIvPBCQuB"
+                >
+                    Mande um pix
+                </a>
             </div>
         </div>
     );
