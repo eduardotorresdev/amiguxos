@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Busca, Button, Page, useModal } from "../../components";
 import "./Home.sass";
+import ReactGA from "react-ga4";
 
 export const Home = () => {
+    ReactGA.send("pageview");
+
     const { show, toggle } = useModal();
     const [data, setData] = useState({
         name: "onca",

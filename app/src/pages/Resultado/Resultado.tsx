@@ -23,12 +23,14 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Helmet } from "react-helmet";
+import ReactGA from "react-ga4";
 
 const schema = yup.object({
     name: yup.string().required("Campo obrigatório"),
 });
 
 export const Resultado = () => {
+    ReactGA.send("pageview");
     const navigate = useNavigate();
     const infoRef = useRef<HTMLDivElement | null>(null);
     const { show, toggle } = useModal();
