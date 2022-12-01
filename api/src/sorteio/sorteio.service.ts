@@ -37,7 +37,15 @@ export class SorteioService {
       ...createSorteioDto,
       _id: uuidv4(),
       slug: slugify(createSorteioDto.title).toLowerCase(),
-      participants: sorteio,
+      participants: sorteio.sort((a, b) => {
+        if (a.from < b.from) {
+          return -1;
+        }
+        if (a.from > b.from) {
+          return 1;
+        }
+        return 0;
+      }),
     });
 
     return createdSorteio.save();
