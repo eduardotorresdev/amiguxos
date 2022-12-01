@@ -6,7 +6,6 @@ import { Page } from "../../components";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { useSorteio } from "../../hooks";
 import * as yup from "yup";
-import ReactGA from "react-ga4";
 
 interface SorteioForm {
     title: string;
@@ -27,7 +26,6 @@ const schema = yup.object({
 });
 
 export const Sorteio = () => {
-    ReactGA.send("pageview");
     const { create, loading } = useSorteio();
     const navigate = useNavigate();
     const { title, name } = useLoaderData() as {

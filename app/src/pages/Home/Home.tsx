@@ -1,11 +1,8 @@
 import { useState } from "react";
-import { Busca, Button, Page, useModal } from "../../components";
+import { Busca, Button, Page, useModal, Portal } from "../../components";
 import "./Home.sass";
-import ReactGA from "react-ga4";
 
 export const Home = () => {
-    ReactGA.send("pageview");
-
     const { show, toggle } = useModal();
     const [data, setData] = useState({
         name: "onca",
@@ -51,7 +48,9 @@ export const Home = () => {
                     <Button state="secondary">+</Button>
                 </li> */}
             </ul>
-            <Busca show={show} toggle={toggle} data={data} />
+            <Portal>
+                <Busca show={show} toggle={toggle} data={data} />
+            </Portal>
         </Page>
     );
 };

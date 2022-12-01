@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { Info } from "../Info/Info";
 import { Title } from "../Title/Title";
 import "./Page.sass";

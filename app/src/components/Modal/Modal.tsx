@@ -1,5 +1,4 @@
 import { ReactNode, useState } from "react";
-import ReactDOM from "react-dom";
 import "./Modal.sass";
 
 type ModalProps = {
@@ -8,11 +7,10 @@ type ModalProps = {
 };
 
 export const Modal = ({ children, show }: ModalProps) => {
-    return ReactDOM.createPortal(
+    return (
         <div className={`modal ${show && "modal--show"}`}>
             <div className="modal__dialog">{children}</div>
-        </div>,
-        document.body
+        </div>
     );
 };
 
