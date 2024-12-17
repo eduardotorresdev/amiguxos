@@ -5,5 +5,13 @@
         "/secreto/novo",
         "/onca/id/title",
         "/secreto/id/title"
-    ]
+    ],
+    "engine": {
+        "launchOptions": {
+            "args": [
+                "--no-sandbox",
+                "--disable-setuid-sandbox"
+            ]
+        }
+    }
 }
